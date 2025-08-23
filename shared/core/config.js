@@ -9,7 +9,7 @@ export const CONFIG = {
     
   API_ENDPOINTS: {
     CASES: 'https://coretax.intranet.pajak.go.id/casemanagement/api/caselist/mycases',
-    DOCUMENTS: 'https://coretax.intranet.pajak.go.id/documentmanagement/api/casedocument/list',
+    DOCUMENTS: 'https://coretax.intranet.pajak.go.id/casemanagement/api/casedocument/list',
     USERS: 'https://coretax.intranet.pajak.go.id/casemanagement/api/caseuser/list',
     PROFILE: 'https://coretax.intranet.pajak.go.id/casemanagement/api/generalinformation/view',
     ROUTING: 'https://coretax.intranet.pajak.go.id/casemanagement/api/caserouting/view',

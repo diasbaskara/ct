@@ -90,6 +90,7 @@ const translations = {
   'loading_profile_name': 'Memuat...',
   'loading_profile_email': 'Memuat...',
   'no_cases_match': 'Tidak ada kasus yang sesuai dengan filter yang dipilih.',
+  'cases.no_data': 'Tidak ada kasus ditemukan.',
   'no_documents_found': 'Tidak ada dokumen ditemukan atau sesuai dengan filter yang dipilih.',
   'no_users_found': 'Tidak ada pengguna ditemukan atau sesuai dengan filter yang dipilih.',
   'no_refund_data': 'Tidak ada data tinjauan restitusi yang sesuai dengan filter.',

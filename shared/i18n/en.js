@@ -88,6 +88,7 @@ const translations = {
   'loading_profile_name': 'Loading...',
   'loading_profile_email': 'Loading...',
   'no_cases_match': 'No cases match the selected filter.',
+  'cases.no_data': 'No cases found.',
   'no_documents_found': 'No documents found or match the selected filter.',
   'no_users_found': 'No users found or match the selected filter.',
   'no_refund_data': 'No refund review data matches the filter.',
