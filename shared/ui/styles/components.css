@@ -1,0 +1,195 @@
+/* CoreTabs Styles */
+.coretabs-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100vh;
+  background: var(--background-paper);
+  box-shadow: var(--shadow-3);
+  z-index: 10000;
+  transition: right var(--transition-normal);
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.coretabs-sidebar.open {
+  right: 0;
+}
+
+.coretabs-header {
+  background: var(--primary-color);
+  color: white;
+  padding: var(--spacing-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.coretabs-title {
+  font-size: var(--font-size-large);
+  font-weight: 600;
+  margin: 0;
+}
+
+.coretabs-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: var(--font-size-xlarge);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-fast);
+}
+
+.coretabs-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.coretabs-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+.coretabs-profile {
+  background: var(--background-secondary);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+}
+
+.coretabs-profile-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.coretabs-profile-role {
+  color: var(--text-secondary);
+  font-size: var(--font-size-small);
+}
+
+.coretabs-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.coretabs-tab {
+  background: none;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-md);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all var(--transition-fast);
+  color: var(--text-secondary);
+  font-size: var(--font-size-normal);
+}
+
+.coretabs-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.coretabs-tab:hover {
+  background-color: var(--background-secondary);
+}
+
+.coretabs-tab-content {
+  display: none;
+}
+
+.coretabs-tab-content.active {
+  display: block;
+}
+
+.coretabs-loading {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+.coretabs-error {
+  background: #ffebee;
+  color: var(--error-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--error-color);
+}
+
+.coretabs-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow-2);
+  z-index: 9999;
+  font-size: var(--font-size-large);
+  transition: all var(--transition-fast);
+}
+
+.coretabs-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-3);
+}
+
+.coretabs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--spacing-md);
+}
+
+.coretabs-table th,
+.coretabs-table td {
+  padding: var(--spacing-sm);
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  font-size: var(--font-size-small);
+}
+
+.coretabs-table th {
+  background: var(--background-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.coretabs-table tr:hover {
+  background: var(--background-secondary);
+}
+
+.coretabs-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.coretabs-badge.status-active {
+  background: #e8f5e8;
+  color: var(--success-color);
+}
+
+.coretabs-badge.status-pending {
+  background: #fff3e0;
+  color: var(--warning-color);
+}
+
+.coretabs-badge.status-completed {
+  background: #e3f2fd;
+  color: var(--info-color);
+}

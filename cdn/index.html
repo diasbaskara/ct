@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreTabs - Installation</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .version-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .install-btn { background: #007cba; color: white; padding: 10px 20px; text-decoration: none; border-radius: 3px; }
+        .latest { background: #f0f8ff; border-color: #007cba; }
+    </style>
+</head>
+<body>
+    <h1>CoreTabs Userscript</h1>
+    <p>Choose your installation option:</p>
+    
+    <div class="version-card latest">
+        <h3>Latest Version (1.0.0) - Recommended</h3>
+        <p>Always get the latest features and bug fixes automatically.</p>
+        <a href="latest/coretabs.user.js" class="install-btn">Install Latest</a>
+    </div>
+    
+    <div class="version-card">
+        <h3>Specific Version (1.0.0)</h3>
+        <p>Pin to this specific version (no automatic updates).</p>
+        <a href="v1.0.0/coretabs.user.js" class="install-btn">Install v1.0.0</a>
+    </div>
+    
+    <h2>Installation Instructions</h2>
+    <ol>
+        <li>Install a userscript manager like <a href="https://tampermonkey.net/">Tampermonkey</a></li>
+        <li>Click one of the install buttons above</li>
+        <li>Confirm the installation in your userscript manager</li>
+        <li>Visit CoreTabs to see the enhanced features</li>
+    </ol>
+    
+    <h2>Available Versions</h2>
+    <div id="versions">Loading...</div>
+    
+    <script>
+        fetch('versions.json')
+            .then(r => r.json())
+            .then(data => {
+                const container = document.getElementById('versions');
+                container.innerHTML = data.versions.map(v => 
+                    `<div class="version-card">
+                        <h4>Version ${v.version}</h4>
+                        <p>Released: ${new Date(v.releaseDate).toLocaleDateString()}</p>
+                        <a href="v${v.version}/coretabs.user.js" class="install-btn">Install</a>
+                    </div>`
+                ).join('');
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+        
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      
+    - name: Run linting
+      run: pnpm run lint
+      
+    - name: Run tests
+      run: pnpm run test
+      
+    - name: Build all ct scripts
+      run: pnpm run build
+      
+    - name: Validate build output
+      run: |
+        echo "Validating build outputs..."
+        
+        # Check if dist directory exists
+        if [ ! -d "dist" ]; then
+          echo "Build failed: dist directory not found"
+          exit 1
+        fi
+        
+        # Validate each script build
+        for config_file in scripts/*/config.json; do
+          if [ -f "$config_file" ]; then
+            script_name=$(basename $(dirname "$config_file"))
+            user_js="dist/${script_name}.user.js"
+            header_js="dist/${script_name}-header.js"
+            
+            if [ ! -f "$user_js" ]; then
+              echo "Build failed: $user_js not found"
+              exit 1
+            fi
+            
+            if [ ! -f "$header_js" ]; then
+              echo "Build failed: $header_js not found"
+              exit 1
+            fi
+            
+            echo "✅ $script_name build validated"
+          fi
+        done
+        
+        echo "All builds validation passed"
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ct-builds
+        path: dist/
+        retention-days: 7

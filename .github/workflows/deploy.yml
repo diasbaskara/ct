@@ -1,0 +1,67 @@
+name: Deploy Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+        
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      
+    - name: Build all ct scripts
+      run: pnpm run build
+      
+    - name: Deploy all scripts to CDN
+      run: pnpm run deploy
+      env:
+        NODE_ENV: production
+        
+    - name: Commit CDN updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add cdn/
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          VERSION=$(node -p "require('./package.json').version")
+          git commit -m "chore: update CDN with version v$VERSION"
+          git push
+        fi
+        
+    - name: Upload Release Assets
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          dist/*.user.js
+          cdn/latest/*.meta.js
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,14 @@
+{
+  "name": "coretabs",
+  "displayName": "CoreTabs",
+  "description": "Enhanced CoreTabs userscript with modular architecture",
+  "version": "1.0.0",
+  "match": "https://coretax.intranet.pajak.go.id/*",
+  "grant": ["GM_setValue", "GM_getValue", "GM_deleteValue"],
+  "require": [],
+  "namespace": "https://github.com/diasbaskara/ct",
+  "homepage": "https://github.com/diasbaskara/ct",
+  "supportURL": "https://github.com/diasbaskara/ct/issues",
+  "updateURL": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/coretabs.meta.js",
+  "downloadURL": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/coretabs.user.js"
+}

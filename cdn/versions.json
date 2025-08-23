@@ -1,0 +1,27 @@
+{
+  "versions": [
+    {
+      "version": "1.0.0",
+      "releaseDate": "2025-08-23T15:25:23.158Z",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/v1.0.0/coretabs.user.js",
+      "metaUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/v1.0.0/coretabs.meta.js",
+      "changelog": [
+        "Bug fixes and improvements",
+        "Enhanced modular architecture",
+        "Better error handling"
+      ]
+    }
+  ],
+  "latest": "1.0.0",
+  "scripts": {
+    "coretabs": {
+      "name": "CoreTabs",
+      "description": "Enhanced CoreTabs userscript with modular architecture",
+      "version": "1.0.0",
+      "downloadUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/v1.0.0/coretabs.user.js",
+      "metaUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/v1.0.0/coretabs.meta.js",
+      "latestUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/coretabs.user.js",
+      "installUrl": "https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/install.html?script=coretabs"
+    }
+  }
+}

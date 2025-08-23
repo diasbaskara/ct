@@ -1,0 +1,121 @@
+name: Release Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+        - patch
+        - minor
+        - major
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'pnpm'
+        
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+      
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Bump version
+      run: |
+        pnpm version ${{ github.event.inputs.version_type }} --no-git-tag-version
+        NEW_VERSION=$(node -p "require('./package.json').version")
+        echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+        
+    - name: Update changelog
+      run: |
+        echo "## v$NEW_VERSION - $(date +'%Y-%m-%d')" > CHANGELOG_NEW.md
+        echo "" >> CHANGELOG_NEW.md
+        echo "### Changes" >> CHANGELOG_NEW.md
+        echo "- Version bump to $NEW_VERSION" >> CHANGELOG_NEW.md
+        echo "" >> CHANGELOG_NEW.md
+        if [ -f CHANGELOG.md ]; then
+          cat CHANGELOG.md >> CHANGELOG_NEW.md
+        fi
+        mv CHANGELOG_NEW.md CHANGELOG.md
+        
+    - name: Build all ct scripts
+      run: pnpm run build
+        
+    - name: Commit version bump
+      run: |
+        git add package.json CHANGELOG.md
+        git commit -m "chore: bump version to v$NEW_VERSION"
+        git tag "v$NEW_VERSION"
+        git push origin main
+        git push origin "v$NEW_VERSION"
+        
+    - name: Generate script list for release
+      run: |
+        echo "SCRIPT_LIST<<EOF" >> $GITHUB_ENV
+        for config_file in scripts/*/config.json; do
+          if [ -f "$config_file" ]; then
+            script_name=$(basename $(dirname "$config_file"))
+            display_name=$(node -p "require('$config_file').displayName || require('$config_file').name")
+            description=$(node -p "require('$config_file').description")
+            echo "- **$display_name**: $description" >> $GITHUB_ENV
+          fi
+        done
+        echo "EOF" >> $GITHUB_ENV
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v${{ env.NEW_VERSION }}
+        name: CT Collection v${{ env.NEW_VERSION }}
+        body: |
+          ## 🚀 What's New in v${{ env.NEW_VERSION }}
+          
+          - Version bump to ${{ env.NEW_VERSION }}
+          
+          ## 📦 Available Scripts
+          
+          ${{ env.SCRIPT_LIST }}
+          
+          ## 📥 Installation
+          
+          ### Quick Install (Latest Versions)
+          - [📋 Browse All Scripts](https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/index.html)
+          - [🔧 Install Helper](https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/install.html)
+          
+          ### CDN Links
+          - **Latest**: https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/
+          - **This Version**: https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/v${{ env.NEW_VERSION }}/
+          - **Versions Manifest**: https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/versions.json
+        files: |
+          dist/*.user.js
+          cdn/latest/*.meta.js
+        generate_release_notes: true
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

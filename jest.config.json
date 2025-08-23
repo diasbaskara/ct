@@ -1,0 +1,24 @@
+{
+  "testEnvironment": "jsdom",
+  "moduleNameMapping": {
+    "^@/(.*)$": "<rootDir>/scripts/$1",
+    "^@shared/(.*)$": "<rootDir>/shared/$1",
+    "^@core/(.*)$": "<rootDir>/shared/core/$1",
+    "^@api/(.*)$": "<rootDir>/shared/api/$1",
+    "^@ui/(.*)$": "<rootDir>/shared/ui/$1",
+    "^@i18n/(.*)$": "<rootDir>/shared/i18n/$1",
+    "^@utils/(.*)$": "<rootDir>/shared/utils/$1"
+  },
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+  "testMatch": [
+    "<rootDir>/tests/**/*.test.js",
+    "<rootDir>/scripts/**/*.test.js",
+    "<rootDir>/shared/**/*.test.js"
+  ],
+  "collectCoverageFrom": [
+    "scripts/**/*.js",
+    "shared/**/*.js",
+    "!scripts/**/*.test.js",
+    "!shared/**/*.test.js"
+  ]
+}
