@@ -576,10 +576,77 @@
 }
 
 /* === LEGACY COMPATIBILITY === */
-.coretabs-sidebar { @extend #ct-sidebar; }
-.coretabs-header { @extend #ct-header; }
-.coretabs-content { @extend #ct-tab-content-area; }
-.coretabs-toggle { @extend #ct-sidebar-toggle; }
-.coretabs-table { @extend .ct-results-table; }
-.coretabs-loading { @extend .ct-loading; }
-.coretabs-error { @extend .ct-error; }
+.coretabs-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--ct-sidebar-width);
+  height: 100vh;
+  background-color: var(--ct-white);
+  box-shadow: var(--ct-shadow-lg);
+  z-index: var(--ct-z-sidebar);
+  transition: transform var(--ct-transition-normal);
+  transform: translateX(-100%);
+  font-family: var(--ct-font-family);
+  display: flex;
+  flex-direction: column;
+}
+
+.coretabs-header {
+  background-color: var(--ct-gray-100);
+  color: var(--ct-gray-800);
+  padding: var(--ct-space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ct-gray-200);
+  flex-shrink: 0;
+}
+
+.coretabs-content {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--ct-white);
+  padding: var(--ct-space-4);
+}
+
+.coretabs-toggle {
+  position: fixed;
+  top: var(--ct-space-4);
+  left: var(--ct-space-4);
+  background-color: var(--ct-primary-600);
+  color: var(--ct-white);
+  border: none;
+  width: var(--ct-space-10);
+  height: var(--ct-space-10);
+  border-radius: var(--ct-radius-md);
+  cursor: pointer;
+  box-shadow: var(--ct-shadow-md);
+  z-index: var(--ct-z-toggle);
+  transition: all var(--ct-transition-fast);
+}
+
+.coretabs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--ct-font-size-sm);
+  background-color: var(--ct-white);
+}
+
+.coretabs-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ct-space-8);
+  color: var(--ct-gray-600);
+  font-size: var(--ct-font-size-sm);
+}
+
+.coretabs-error {
+  background-color: var(--ct-error-50);
+  border: 1px solid var(--ct-error-200);
+  color: var(--ct-error-700);
+  padding: var(--ct-space-4);
+  border-radius: var(--ct-radius-md);
+  margin: var(--ct-space-4) 0;
+}
