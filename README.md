@@ -24,8 +24,8 @@ A comprehensive userscript for enhancing the CoreTax intranet experience.
    - [Violentmonkey](https://violentmonkey.github.io/) (Chrome, Firefox, Edge)
 
 2. **Browse and install scripts:**
-   - **Browse All Scripts**: [📋 Script Gallery](https://githack.com/diasbaskara/ct/raw/main/cdn/index.html)
-   - **Install Helper**: [🔧 Installation Assistant](https://githack.com/diasbaskara/ct/raw/main/cdn/install.html)
+   - **Browse All Scripts**: [📋 Script Gallery](https://raw.githack.com/diasbaskara/ct/main/cdn/index.html)
+   - **Install Helper**: [🔧 Installation Assistant](https://raw.githack.com/diasbaskara/ct/main/cdn/install.html)
    - **CoreTabs**: [📥 Install Latest](https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/coretabs.user.js)
 
 ### Manual Installation
@@ -132,31 +132,32 @@ pnpm run deploy:coretabs
 
 ### Project Structure
 
-scripts/
-├── coretabs/          # CoreTabs script
-│   ├── config.json    # Script configuration
-│   ├── src/           # Script source code
-│   └── styles/        # Script-specific styles
-└── newscript/         # Example new script
-├── config.json
-├── src/
-└── styles/
+**Scripts Directory:**
+- `scripts/coretabs/` - CoreTabs script
+  - `config.json` - Script configuration
+  - `src/` - Script source code
+  - `styles/` - Script-specific styles
+- `scripts/newscript/` - Example new script
+  - `config.json`
+  - `src/`
+  - `styles/`
 
-shared/                # Shared modules across all scripts
-├── api/               # API integration modules
-├── core/              # Core functionality and configuration
-├── i18n/              # Internationalization
-├── ui/                # UI components and event handlers
-└── utils/             # Utility functions
+**Shared Modules:**
+- `shared/api/` - API integration modules
+- `shared/core/` - Core functionality and configuration
+- `shared/i18n/` - Internationalization
+- `shared/ui/` - UI components and event handlers
+- `shared/utils/` - Utility functions
 
-build/                 # Build system and deployment scripts
-├── deploy.js          # Multi-script deployment
-├── css-to-string-loader.js
-└── templates/         # Build templates
+**Build System:**
+- `build/deploy.js` - Multi-script deployment
+- `build/css-to-string-loader.js`
+- `build/templates/` - Build templates
 
-.github/workflows/     # CI/CD pipelines
-cdn/                   # CDN distribution files
-dist/                  # Build output
+**Other Directories:**
+- `.github/workflows/` - CI/CD pipelines
+- `cdn/` - CDN distribution files
+- `dist/` - Build output
 
 ## 🔧 Available Scripts
 
