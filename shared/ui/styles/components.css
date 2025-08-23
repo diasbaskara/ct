@@ -575,99 +575,10 @@
     display: none;
 }
 
-/* Remove the LEGACY COMPATIBILITY section and replace with proper ct- styles */
+/* Remove lines 650-746 and replace with: */
 
-/* === CT SIDEBAR === */
-#ct-sidebar {
-  position: fixed;
-  top: 0;
-  right: calc(-1 * var(--ct-sidebar-width));
-  width: var(--ct-sidebar-width);
-  height: 100vh;
-  background-color: var(--ct-white);
-  box-shadow: var(--ct-shadow-xl);
-  z-index: var(--ct-z-index-modal);
-  transition: right var(--ct-transition-normal);
-  font-family: var(--ct-font-family);
-  font-size: var(--ct-font-size-sm);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  max-height: var(--ct-sidebar-max-height);
-  border-radius: var(--ct-radius-lg) 0 0 var(--ct-radius-lg);
-}
-
-#ct-sidebar.open {
-  right: 0;
-}
-
-#ct-sidebar-toggle {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background-color: var(--ct-primary-700);
-  color: var(--ct-white);
-  border: none;
-  height: var(--ct-space-16);
-  width: var(--ct-space-8);
-  border-radius: var(--ct-radius-lg) 0 0 var(--ct-radius-lg);
-  cursor: pointer;
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: calc(var(--ct-z-index-modal) + 1);
-  font-size: var(--ct-font-size-sm);
-  font-weight: var(--ct-font-weight-bold);
-  letter-spacing: var(--ct-letter-spacing-wide);
-  padding: var(--ct-space-3) var(--ct-space-2);
-  margin-right: var(--ct-space-1);
-  transition: all var(--ct-transition-fast);
-  box-shadow: var(--ct-shadow-md);
-}
-
-#ct-sidebar-toggle:hover {
-  background-color: var(--ct-primary-800);
-  transform: translateY(-50%) translateX(-2px);
-  box-shadow: var(--ct-shadow-lg);
-}
-
-#ct-sidebar-toggle:focus {
-  outline: 3px solid var(--ct-primary-300);
-  outline-offset: 3px;
-}
-
-/* Hide toggle button when sidebar is open */
-#ct-sidebar.open + #ct-sidebar-toggle {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-50%) translateX(100%);
-  pointer-events: none;
-}
-
-.coretabs-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: var(--ct-sidebar-width);
-  height: 100vh;
-  background-color: var(--ct-white);
-  box-shadow: var(--ct-shadow-lg);
-  z-index: var(--ct-z-sidebar);
-  transition: transform var(--ct-transition-normal);
-  transform: translateX(-100%);
-  font-family: var(--ct-font-family);
-  display: flex;
-  flex-direction: column;
-}
-
-.coretabs-sidebar.open {
-  transform: translateX(0);
-}
-
-.coretabs-header {
+/* === CT HEADER === */
+#ct-header {
   background-color: var(--ct-gray-100);
   color: var(--ct-gray-800);
   padding: var(--ct-space-4);
@@ -678,56 +589,24 @@
   flex-shrink: 0;
 }
 
-.coretabs-content {
+/* === CT CONTENT === */
+#ct-content {
   flex: 1;
   overflow-y: auto;
   background-color: var(--ct-white);
   padding: var(--ct-space-4);
 }
 
-.coretabs-toggle,
-#ct-sidebar-toggle {
-  position: fixed;
-  top: var(--ct-space-4);
-  left: var(--ct-space-4);
-  background-color: var(--ct-primary-600);
-  color: var(--ct-white);
-  border: none;
-  width: var(--ct-space-10);
-  height: var(--ct-space-10);
-  border-radius: var(--ct-radius-md);
-  cursor: pointer;
-  box-shadow: var(--ct-shadow-md);
-  z-index: var(--ct-z-toggle);
-  transition: all var(--ct-transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--ct-font-size-xs);
-  font-weight: var(--ct-font-weight-medium);
-}
-
-.coretabs-toggle:hover,
-#ct-sidebar-toggle:hover {
-  background-color: var(--ct-primary-700);
-  transform: translateY(-1px);
-  box-shadow: var(--ct-shadow-lg);
-}
-
-.coretabs-toggle:focus,
-#ct-sidebar-toggle:focus {
-  outline: 2px solid var(--ct-primary-300);
-  outline-offset: 2px;
-}
-
-.coretabs-table {
+/* === CT TABLE === */
+.ct-results-table {
   width: 100%;
   border-collapse: collapse;
   font-size: var(--ct-font-size-sm);
   background-color: var(--ct-white);
 }
 
-.coretabs-loading {
+/* === CT LOADING === */
+.ct-loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -736,7 +615,8 @@
   font-size: var(--ct-font-size-sm);
 }
 
-.coretabs-error {
+/* === CT ERROR === */
+.ct-error {
   background-color: var(--ct-error-50);
   border: 1px solid var(--ct-error-200);
   color: var(--ct-error-700);
