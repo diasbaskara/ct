@@ -1,9 +1,8 @@
 import { t } from '@i18n';
-// Remove unused state import
 
 export function createSidebar() {
   // Remove existing sidebar if any
-  const existing = document.getElementById('coretabs-sidebar');
+  const existing = document.getElementById('ct-sidebar');
   if (existing) {
     existing.remove();
   }
@@ -13,12 +12,12 @@ export function createSidebar() {
     
   // Create sidebar HTML safely
   const sidebar = document.createElement('div');
-  sidebar.id = 'coretabs-sidebar';
-  sidebar.className = 'coretabs-sidebar';
+  sidebar.id = 'ct-sidebar';
+  sidebar.className = 'ct-sidebar';
     
   // Create header
   const header = document.createElement('div');
-  header.className = 'coretabs-header';
+  header.className = 'ct-header';
   header.id = 'ct-header';
     
   // Navigation section
@@ -101,18 +100,10 @@ export function createSidebar() {
   const content = document.createElement('div');
   content.className = 'ct-content';
   content.id = 'ct-content';
-  
-  // Create loading message
-  const loading = document.createElement('div');
-  loading.className = 'ct-loading-message';
-  loading.textContent = t('loading_my_cases');
-  content.appendChild(loading);
     
-  // Assemble the sidebar
   sidebar.appendChild(header);
   sidebar.appendChild(content);
     
-  // Add to document
   document.body.appendChild(sidebar);
     
   return sidebar;
@@ -127,7 +118,7 @@ export function createToggleButton() {
   
   const toggle = document.createElement('button');
   toggle.id = 'ct-sidebar-toggle';
-  toggle.className = 'coretabs-toggle';
+  toggle.className = 'ct-sidebar-toggle';
   toggle.textContent = t('coretabs');
   toggle.setAttribute('aria-label', t('app.toggle'));
   

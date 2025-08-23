@@ -5,9 +5,9 @@ import { createMainContent, switchToTab } from './components/mainContent';
 
 export function initializeEventHandlers() {
   // Toggle sidebar
-  const toggle = document.getElementById('coretabs-toggle');
-  const sidebar = document.getElementById('coretabs-sidebar');
-  const closeBtn = document.getElementById('coretabs-close');
+  const toggle = document.getElementById('ct-sidebar-toggle');
+  const sidebar = document.getElementById('ct-sidebar');
+  const closeBtn = document.getElementById('ct-close');
     
   if (toggle && sidebar) {
     toggle.addEventListener('click', () => {
@@ -37,7 +37,7 @@ export function initializeEventHandlers() {
       state.set('currentLanguage', newLanguage);
       
       // Refresh the sidebar content
-      const sidebar = document.getElementById('coretabs-sidebar');
+      const sidebar = document.getElementById('ct-sidebar');
       if (sidebar && sidebar.classList.contains('open')) {
         updateSidebarLabels();
         createMainContent();
