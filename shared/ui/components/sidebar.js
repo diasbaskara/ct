@@ -120,13 +120,13 @@ export function createSidebar() {
 
 export function createToggleButton() {
   // Remove existing toggle if any
-  const existing = document.getElementById('coretabs-toggle');
+  const existing = document.getElementById('ct-sidebar-toggle');
   if (existing) {
     existing.remove();
   }
   
   const toggle = document.createElement('button');
-  toggle.id = 'coretabs-toggle';
+  toggle.id = 'ct-sidebar-toggle';
   toggle.className = 'coretabs-toggle';
   toggle.textContent = t('coretabs');
   toggle.setAttribute('aria-label', t('app.toggle'));
