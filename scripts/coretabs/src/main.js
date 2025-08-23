@@ -1,6 +1,8 @@
 import { state } from '@core/state.js';
 import { fetchMyCases } from '@api/cases.js';
 import UpdateChecker from '@utils/updateChecker.js';
+import { initializeEventHandlers } from '@ui/events.js';
+import { createSidebar, createToggleButton } from '@ui/components/sidebar.js';
 
 // Import CSS files
 import variablesCSS from '@ui/styles/variables.css';
@@ -48,10 +50,13 @@ class CoreTabs {
   
   createUI() {
     // Create sidebar with all components
+    createToggleButton();
+    createSidebar();
   }
   
   initializeEventHandlers() {
     // Initialize event handlers
+    initializeEventHandlers();
   }
   
   initializeState() {
