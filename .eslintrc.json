@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "greasemonkey": true
+    "greasemonkey": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended"
@@ -18,8 +19,34 @@
     "GM_deleteValue": "readonly",
     "GM_listValues": "readonly",
     "GM_info": "readonly",
-    "unsafeWindow": "readonly"
+    "unsafeWindow": "readonly",
+    "__VERSION__": "readonly",
+    "__dirname": "readonly",
+    "SIDEBAR_STATE_KEY": "readonly",
+    "GRANT": "readonly",
+    "REQUIRE": "readonly"
   },
+  "overrides": [
+    {
+      "files": ["build/**/*.js", "webpack.config.js"],
+      "env": {
+        "node": true,
+        "browser": false
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["cdn/**/*.js", "dist/**/*.js"],
+      "rules": {
+        "no-console": "off",
+        "no-empty": "off",
+        "no-case-declarations": "off",
+        "no-undef": "off"
+      }
+    }
+  ],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],

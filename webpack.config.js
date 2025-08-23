@@ -82,30 +82,30 @@ module.exports = (env, argv) => {
           from: 'build/templates/userscript-header.js',
           to: `${config.name}-header.js`,
           transform(content) {
-              const isDebug = process.env.NODE_ENV !== 'production' || process.env.WEBPACK_DEBUG === 'true';
-              if (isDebug) {
-                  console.log('Processing template for:', config.name);
-              }
-              const template = content.toString();
-              if (isDebug) {
-                  console.log('Template before:', template.substring(0, 100));
-              }
-              const result = template
-                  .replace(/{{VERSION}}/g, config.version || packageJson.version)
-                  .replace(/{{NAME}}/g, config.displayName || config.name)
-                  .replace(/{{DESCRIPTION}}/g, config.description)
-                  .replace(/{{MATCH}}/g, config.match)
-                  .replace(/{{NAMESPACE}}/g, config.namespace)
-                  .replace(/{{HOMEPAGE}}/g, config.homepage)
-                  .replace(/{{SUPPORT_URL}}/g, config.supportURL)
-                  .replace(/{{UPDATE_URL}}/g, config.updateURL)
-                  .replace(/{{DOWNLOAD_URL}}/g, config.downloadURL)
-                  .replace(/{{GRANT}}/g, config.grant.map(g => `// @grant        ${g}`).join('\n'))
-                  .replace(/{{REQUIRE}}/g, config.require.map(r => `// @require      ${r}`).join('\n'));
-              if (isDebug) {
-                  console.log('Template after:', result.substring(0, 100));
-              }
-              return result;
+            const isDebug = process.env.NODE_ENV !== 'production' || process.env.WEBPACK_DEBUG === 'true';
+            if (isDebug) {
+              console.log('Processing template for:', config.name);
+            }
+            const template = content.toString();
+            if (isDebug) {
+              console.log('Template before:', template.substring(0, 100));
+            }
+            const result = template
+              .replace(/{{VERSION}}/g, config.version || packageJson.version)
+              .replace(/{{NAME}}/g, config.displayName || config.name)
+              .replace(/{{DESCRIPTION}}/g, config.description)
+              .replace(/{{MATCH}}/g, config.match)
+              .replace(/{{NAMESPACE}}/g, config.namespace)
+              .replace(/{{HOMEPAGE}}/g, config.homepage)
+              .replace(/{{SUPPORT_URL}}/g, config.supportURL)
+              .replace(/{{UPDATE_URL}}/g, config.updateURL)
+              .replace(/{{DOWNLOAD_URL}}/g, config.downloadURL)
+              .replace(/{{GRANT}}/g, config.grant.map(g => `// @grant        ${g}`).join('\n'))
+              .replace(/{{REQUIRE}}/g, config.require.map(r => `// @require      ${r}`).join('\n'));
+            if (isDebug) {
+              console.log('Template after:', result.substring(0, 100));
+            }
+            return result;
           }
         }))
       }),

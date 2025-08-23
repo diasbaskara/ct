@@ -1,0 +1,10 @@
+# Generated files
+dist/
+cdn/
+build/templates/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
