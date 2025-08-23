@@ -1,71 +1,134 @@
 const translations = {
-  app: {
-    title: 'CoreTabs',
-    toggle: 'Toggle CoreTabs'
-  },
-  common: {
-    loading: 'Memuat...',
-    error: 'Terjadi kesalahan',
-    retry: 'Coba Lagi',
-    close: 'Tutup',
-    save: 'Simpan',
-    cancel: 'Batal',
-    delete: 'Hapus',
-    edit: 'Edit',
-    view: 'Lihat',
-    download: 'Unduh',
-    print: 'Cetak'
-  },
-  tabs: {
-    cases: 'Kasus Saya',
-    documents: 'Dokumen',
-    routing: 'Routing',
-    profile: 'Profil'
-  },
-  cases: {
-    title: 'Manajemen Kasus',
-    caseNumber: 'Nomor Kasus',
-    status: 'Status',
-    type: 'Jenis',
-    createdDate: 'Tanggal Dibuat',
-    lastUpdate: 'Update Terakhir',
-    assignee: 'Penanggung Jawab',
-    priority: 'Prioritas',
-    noData: 'Tidak ada kasus ditemukan'
-  },
-  documents: {
-    title: 'Manajemen Dokumen',
-    fileName: 'Nama File',
-    fileType: 'Jenis',
-    fileSize: 'Ukuran',
-    uploadDate: 'Tanggal Upload',
-    actions: 'Aksi',
-    noData: 'Tidak ada dokumen ditemukan'
-  },
-  routing: {
-    title: 'Routing Kasus',
-    step: 'Langkah',
-    assignee: 'Penanggung Jawab',
-    status: 'Status',
-    date: 'Tanggal',
-    comments: 'Komentar',
-    noData: 'Tidak ada informasi routing'
-  },
-  profile: {
-    title: 'Profil Pengguna',
-    name: 'Nama',
-    role: 'Peran',
-    department: 'Departemen',
-    email: 'Email',
-    phone: 'Telepon'
-  },
-  filters: {
-    all: 'Semua',
-    active: 'Aktif',
-    pending: 'Menunggu',
-    completed: 'Selesai',
-    inProgress: 'Sedang Berjalan'
-  }
+  // Navigation & Screens
+  'my_cases': 'Kasus Saya',
+  'case_details': 'Detail Kasus',
+  'back': '← Kembali',
+  'no_case_selected': 'Tidak Ada Kasus Dipilih',
+  'select_case_message': 'Silakan pilih kasus dari layar "Kasus Saya"',
+  'select_case_tab_message': 'Silakan pilih kasus dari tab "Kasus Saya"',
+
+  // Tabs
+  'profile': 'Profil',
+  'documents': 'Dokumen',
+  'users': 'Pengguna',
+  'refund_review': 'Tinjauan Restitusi',
+  'case_documents': 'Dokumen Kasus',
+  'case_users': 'Pengguna Kasus',
+  'routing': 'Alur',
+
+  // Buttons
+  'open': 'Buka',
+  'docs': 'Dokumen',
+  'download': 'Unduh',
+  'downloading': 'Mengunduh...',
+  'print': 'Cetak',
+  'printing': 'Mencetak...',
+  'print_failed': 'Cetak gagal',
+  'reload': 'Muat Ulang',
+  'reload_page': 'Muat Ulang Halaman',
+  'collapse_all': 'Tutup Semua',
+  'expand_all': 'Bentangkan Semua',
+  'download_excel': 'Unduh Excel',
+  'coretabs': 'CoreTabs',
+
+  // Filters
+  'filter_by_status': 'Filter berdasarkan Status:',
+  'filter_by_role': 'Filter berdasarkan Peran:',
+  'filter_by_reported': 'Filter berdasarkan Dilaporkan:',
+  'show_all': 'Tampilkan Semua',
+  'yes': 'Ya',
+  'no': 'Tidak',
+
+  // Table Headers
+  'case_number': 'Nomor Kasus',
+  'taxpayer_name_tin': 'Nama & NPWP Wajib Pajak',
+  'taxpayer_name': 'Nama Wajib Pajak',
+  'tin': 'NPWP',
+  'case_type': 'Jenis Kasus',
+  'status': 'Status',
+  'created_date': 'Tanggal Dibuat',
+  'actions': 'Aksi',
+  'letter_number': 'Nomor Surat',
+  'file_name': 'Nama File',
+  'date': 'Tanggal',
+  'full_name': 'Nama Lengkap',
+  'nip': 'NIP',
+  'position': 'Jabatan',
+  'office_name': 'Nama Kantor',
+  'doc_number': 'Nomor Dokumen',
+  'selling_price': 'Harga Jual',
+  'vat_paid': 'PPN Dibayar',
+  'stlg_paid': 'PPnBM Dibayar',
+  'trans_code': 'Kode Transaksi',
+  'reported': 'Dilaporkan',
+  'case_role': 'Peran Kasus',
+
+  // Status Values
+  'in_progress': 'Sedang Berlangsung',
+  'completed': 'Selesai',
+  'cancelled': 'Dibatalkan',
+  'draft': 'Draf',
+  'submitted': 'Diajukan',
+  'approved': 'Disetujui',
+  'rejected': 'Ditolak',
+  'taxpayer': 'Wajib Pajak',
+  'tax_officer': 'Petugas Pajak',
+  'supervisor': 'Supervisor',
+  'head_of_regional_office': 'Kepala Kanwil',
+  'head_of_division_of_audit,_collection,_intelligence,_and_investigation': 'Kepala Bidang Pemeriksaan, Penagihan, Intelijen, dan Penyidikan',
+  'head_of_section_of_preliminary_investigation_&_investigation_administration': 'Kepala Seksi Administrasi Bukti Permulaan dan Penyidikan',
+  'digital_forensic_team_member': 'Anggota Tim Forensik Digital',
+  'digital_forensic_team_leader': 'Ketua Tim Forensik Digital',
+
+  // Messages
+  'loading': 'Memuat...',
+  'loading_my_cases': 'Memuat kasus saya...',
+  'loading_documents': 'Memuat dokumen...',
+  'loading_users': 'Memuat pengguna...',
+  'loading_profile': 'Memuat informasi profil...',
+  'loading_routing': 'Memuat informasi alur...',
+  'loading_profile_name': 'Memuat...',
+  'loading_profile_email': 'Memuat...',
+  'no_cases_match': 'Tidak ada kasus yang sesuai dengan filter yang dipilih.',
+  'no_documents_found': 'Tidak ada dokumen ditemukan atau sesuai dengan filter yang dipilih.',
+  'no_users_found': 'Tidak ada pengguna ditemukan atau sesuai dengan filter yang dipilih.',
+  'no_refund_data': 'Tidak ada data tinjauan restitusi yang sesuai dengan filter.',
+  'profile_not_available': 'Profil tidak tersedia',
+  'please_log_in': 'Silakan masuk',
+  'error_loading_profile': 'Kesalahan memuat profil',
+  'please_reload': 'Silakan muat ulang',
+  'download_failed': 'Unduhan gagal',
+  'case_must_be_selected': 'Kasus harus dipilih.',
+  'select_case_for_documents': 'Silakan pilih kasus untuk melihat dokumennya.',
+  'select_case_for_users': 'Silakan pilih kasus untuk melihat penggunanya.',
+  'select_case_for_profile': 'Silakan pilih kasus untuk melihat informasi profilnya.',
+  'select_case_for_routing': 'Silakan pilih kasus untuk melihat informasi alurnya.',
+  'select_refund_case': 'Pilih kasus restitusi dan klik "Tinjauan Restitusi" di header atau baris.',
+
+  // Process Steps
+  'step_1_3_fetching_subprocess': 'Langkah 1/3: Mengambil ID Sub Proses...',
+  'step_2_3_fetching_reference': 'Langkah 2/3: Mengambil nomor referensi...',
+  'step_3_3_fetching_refund': 'Langkah 3/3: Mengambil detail restitusi...',
+
+  // Profile Fields
+  'registration_date': 'Tanggal Registrasi',
+  'email_address': 'Alamat Email',
+  'telephone_number': 'Nomor Telepon',
+  'tax_region': 'Wilayah Pajak',
+  'tax_office': 'Kantor Pajak',
+  'tax_office_address': 'Alamat Kantor Pajak',
+  'tax_office_phone': 'Nomor Telepon Kantor Pajak',
+  'description': 'Deskripsi',
+  'business_classification': 'Klasifikasi Usaha',
+  'tax_period': 'Periode Pajak',
+  'tax_year': 'Tahun Pajak',
+  'last_modified': 'Terakhir Diubah',
+  'created_by': 'Dibuat Oleh',
+
+  // Common Values
+  'na': 'T/A',
+  'error_occurred': 'Terjadi kesalahan:',
+  'language': 'Bahasa'
 };
 
 export { translations };

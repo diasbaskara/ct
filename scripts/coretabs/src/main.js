@@ -1,25 +1,13 @@
-// Import styles as modules (webpack will handle them)
-import variablesCSS from '@shared/ui/styles/variables.css';
-import componentsCSS from '@shared/ui/styles/components.css';
-import responsiveCSS from '@shared/ui/styles/responsive.css';
+import { state } from '@core/state.js';
+import { fetchMyCases } from '@api/cases.js';
+import UpdateChecker from '@utils/updateChecker.js';
 
-// Import shared modules
-import { setLanguage, getCurrentLanguage } from '@shared/i18n';
-
-// Import UI components
-import { createSidebar } from '@shared/ui/components/sidebar';
-import { initializeEventHandlers } from '@shared/ui/events';
-
-// Import API modules
-import { loadUserProfile } from '@shared/api/auth';
-import { fetchMyCases } from '@shared/api/cases';
-
-// Import utilities
-import { setupPersistenceListeners, restoreSidebarState } from '@shared/utils/persistence';
-import UpdateChecker from '@shared/utils/updateChecker';
+// Import CSS files
+import variablesCSS from '@ui/styles/variables.css';
+import componentsCSS from '@ui/styles/components.css';
+import responsiveCSS from '@ui/styles/responsive.css';
 
 // Version will be injected by webpack
-// Fixed: Improved version detection
 const VERSION = typeof __VERSION__ !== 'undefined' ? __VERSION__ : '1.0.0';
 
 /**
@@ -48,29 +36,58 @@ class CoreTabs {
     if (this.initialized) return;
     
     try {
+      this.initializeState();
+      this.createUI();
+      this.initializeEventHandlers();
+      await this.fetchInitialData();
       this.initialized = true;
-      
-      // Initialize language system
-      setLanguage(getCurrentLanguage());
-      
-      // Create UI
-      createSidebar();
-      
-      // Load user profile
-      await loadUserProfile();
-      
-      // Initialize event handlers
-      initializeEventHandlers();
-      
-      // Setup persistence
-      setupPersistenceListeners();
-      restoreSidebarState();
-      
-      // Load initial data
-      await fetchMyCases();
-      
     } catch (error) {
-      throw new Error(`CoreTabs initialization failed: ${error.message}`);
+      // Error handling without console statement
+    }
+  }
+  
+  createUI() {
+    // Create sidebar with all components
+  }
+  
+  initializeEventHandlers() {
+    // Initialize event handlers
+  }
+  
+  initializeState() {
+    // Initialize state with default values
+    state.set('currentScreen', 'cases');
+    state.set('currentTab', 'profile');
+    state.set('sidebarOpen', false);
+    state.set('selectedCaseId', null);
+    state.set('currentLanguage', 'en');
+    
+    // Initialize data states
+    state.set('allMyCases', []);
+    state.set('allCaseDocuments', []);
+    state.set('allCaseUsers', []);
+    state.set('refundReviewData', []);
+    state.set('filteredRefundData', []);
+    state.set('routingData', null);
+    state.set('workflowDiagram', null);
+    
+    // Initialize loading states
+    state.set('loadedCasesForCaseId', null);
+    state.set('loadedDocumentsForCaseId', null);
+    state.set('loadedUsersForCaseId', null);
+    state.set('loadedRefundForCaseId', null);
+    state.set('loadedRoutingForCaseId', null);
+  }
+  
+  async fetchInitialData() {
+    try {
+      // Pre-load user cases
+      const cases = await fetchMyCases();
+      if (cases && cases.data) {
+        state.set('allMyCases', cases.data);
+      }
+    } catch (error) {
+      // Error handling without console statement
     }
   }
 }

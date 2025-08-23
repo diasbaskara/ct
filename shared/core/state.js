@@ -1,6 +1,31 @@
 class StateManager {
   constructor() {
-    this.state = {};
+    this.state = {
+      // Core data arrays
+      allMyCases: [],
+      allCaseDocuments: [],
+      allCaseUsers: [],
+      refundReviewData: [],
+      filteredRefundData: [],
+      
+      // Selected state
+      selectedCaseId: null,
+      
+      // Loading states
+      loadedDocsForCaseId: null,
+      loadedUsersForCaseId: null,
+      loadedProfileForCaseId: null,
+      loadedRoutingForCaseId: null,
+      
+      // Additional data
+      routingData: null,
+      workflowDiagram: null,
+      
+      // UI state
+      currentScreen: 'my-cases', // 'my-cases' or 'case-details'
+      currentTab: 'my-cases',
+      sidebarOpen: false
+    };
     this.listeners = {};
   }
     
@@ -44,20 +69,36 @@ class StateManager {
   }
     
   clear() {
-    this.state = {};
+    this.state = {
+      allMyCases: [],
+      allCaseDocuments: [],
+      allCaseUsers: [],
+      refundReviewData: [],
+      filteredRefundData: [],
+      selectedCaseId: null,
+      loadedDocsForCaseId: null,
+      loadedUsersForCaseId: null,
+      loadedProfileForCaseId: null,
+      loadedRoutingForCaseId: null,
+      routingData: null,
+      workflowDiagram: null,
+      currentScreen: 'my-cases',
+      currentTab: 'my-cases',
+      sidebarOpen: false
+    };
     this.listeners = {};
   }
     
   notify(event, data) {
-    const listeners = this.listeners.get(event) || [];
-    listeners.forEach(callback => {
-      try {
-        callback(data);
-      } catch (error) {
-        // Handle listener errors silently or use proper error reporting
-        // Could implement a global error handler here
-      }
-    });
+    if (this.listeners[event]) {
+      this.listeners[event].forEach(callback => {
+        try {
+          callback(data);
+        } catch (error) {
+          // Handle listener errors silently in production
+        }
+      });
+    }
   }
 }
 

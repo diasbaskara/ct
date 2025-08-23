@@ -1,84 +1,132 @@
 const translations = {
-  app: {
-    title: 'CoreTabs',
-    toggle: 'Toggle CoreTabs'
-  },
-  common: {
-    loading: 'Loading...',
-    error: 'Error occurred',
-    retry: 'Retry',
-    close: 'Close',
-    save: 'Save',
-    cancel: 'Cancel',
-    delete: 'Delete',
-    edit: 'Edit',
-    view: 'View',
-    download: 'Download',
-    print: 'Print'
-  },
-  tabs: {
-    cases: 'My Cases',
-    documents: 'Documents',
-    routing: 'Routing',
-    profile: 'Profile'
-  },
-  cases: {
-    title: 'Case Management',
-    caseNumber: 'Case Number',
-    status: 'Status',
-    type: 'Type',
-    createdDate: 'Created Date',
-    lastUpdate: 'Last Update',
-    assignee: 'Assignee',
-    priority: 'Priority',
-    noData: 'No cases found'
-  },
-  documents: {
-    title: 'Document Management',
-    fileName: 'File Name',
-    fileType: 'Type',
-    fileSize: 'Size',
-    uploadDate: 'Upload Date',
-    actions: 'Actions',
-    noData: 'No documents found'
-  },
-  routing: {
-    title: 'Case Routing',
-    step: 'Step',
-    assignee: 'Assignee',
-    status: 'Status',
-    date: 'Date',
-    comments: 'Comments',
-    noData: 'No routing information'
-  },
-  profile: {
-    title: 'User Profile',
-    name: 'Name',
-    role: 'Role',
-    department: 'Department',
-    email: 'Email',
-    phone: 'Phone'
-  },
-  filters: {
-    all: 'All',
-    active: 'Active',
-    pending: 'Pending',
-    completed: 'Completed',
-    inProgress: 'In Progress'
-  },
-  update: {
-    available: 'Update Available',
-    newVersion: 'A new version of CoreTabs is available!',
-    current: 'Current',
-    latest: 'Latest',
-    changelog: 'What\'s New:',
-    install: 'Install Update',
-    later: 'Later',
-    skip: 'Skip This Version',
-    checking: 'Checking for updates...',
-    upToDate: 'You have the latest version',
-    checkFailed: 'Failed to check for updates'
-  }
+  // Navigation & Screens
+  'my_cases': 'My Cases',
+  'case_details': 'Case Details',
+  'back': '← Back',
+  'no_case_selected': 'No Case Selected',
+  'select_case_message': 'Please select a case from the "My Cases" screen',
+  'select_case_tab_message': 'Please select a case from the "My Cases" tab',
+
+  // Tabs
+  'profile': 'Profile',
+  'documents': 'Documents',
+  'users': 'Users',
+  'refund_review': 'Refund Review',
+  'case_documents': 'Case Documents',
+  'case_users': 'Case Users',
+  'routing': 'Routing',
+
+  // Buttons
+  'open': 'Open',
+  'docs': 'Docs',
+  'download': 'Download',
+  'downloading': 'Downloading...',
+  'print': 'Print',
+  'printing': 'Printing...',
+  'print_failed': 'Print failed',
+  'reload': 'Reload',
+  'reload_page': 'Reload Page',
+  'collapse_all': 'Collapse All',
+  'expand_all': 'Expand All',
+  'download_excel': 'Download Excel',
+  'coretabs': 'CoreTabs',
+
+  // Filters
+  'filter_by_status': 'Filter by Status:',
+  'filter_by_role': 'Filter by Role:',
+  'filter_by_reported': 'Filter by Reported:',
+  'show_all': 'Show All',
+  'yes': 'Yes',
+  'no': 'No',
+
+  // Table Headers
+  'case_number': 'Case Number',
+  'taxpayer_name_tin': 'Taxpayer Name & TIN',
+  'case_type': 'Case Type',
+  'status': 'Status',
+  'created_date': 'Created Date',
+  'actions': 'Actions',
+  'letter_number': 'Letter Number',
+  'file_name': 'File Name',
+  'date': 'Date',
+  'full_name': 'Full Name',
+  'nip': 'NIP',
+  'position': 'Position',
+  'office_name': 'Office Name',
+  'doc_number': 'Doc Number',
+  'selling_price': 'Selling Price',
+  'vat_paid': 'VAT Paid',
+  'stlg_paid': 'STLG Paid',
+  'trans_code': 'Trans Code',
+  'reported': 'Reported',
+  'case_role': 'Case Role',
+
+  // Status Values
+  'in_progress': 'In Progress',
+  'completed': 'Completed',
+  'cancelled': 'Cancelled',
+  'draft': 'Draft',
+  'submitted': 'Submitted',
+  'approved': 'Approved',
+  'rejected': 'Rejected',
+  'taxpayer': 'Taxpayer',
+  'tax_officer': 'Tax Officer',
+  'supervisor': 'Supervisor',
+  'head_of_regional_office': 'Head of Regional Office',
+  'head_of_division_of_audit,_collection,_intelligence,_and_investigation': 'Head of Division of Audit, Collection, Intelligence, and Investigation',
+  'head_of_section_of_preliminary_investigation_&_investigation_administration': 'Head of Section of Preliminary Investigation & Investigation Administration',
+  'digital_forensic_team_member': 'Digital Forensic Team Member',
+  'digital_forensic_team_leader': 'Digital Forensic Team Leader',
+
+  // Messages
+  'loading': 'Loading...',
+  'loading_my_cases': 'Loading my cases...',
+  'loading_documents': 'Loading documents...',
+  'loading_users': 'Loading users...',
+  'loading_profile': 'Loading profile information...',
+  'loading_routing': 'Loading routing information...',
+  'loading_profile_name': 'Loading...',
+  'loading_profile_email': 'Loading...',
+  'no_cases_match': 'No cases match the selected filter.',
+  'no_documents_found': 'No documents found or match the selected filter.',
+  'no_users_found': 'No users found or match the selected filter.',
+  'no_refund_data': 'No refund review data matches the filter.',
+  'profile_not_available': 'Profile not available',
+  'please_log_in': 'Please log in',
+  'error_loading_profile': 'Error loading profile',
+  'please_reload': 'Please reload',
+  'download_failed': 'Download failed',
+  'case_must_be_selected': 'A case must be selected.',
+  'select_case_for_documents': 'Please select a case to view its documents.',
+  'select_case_for_users': 'Please select a case to view its users.',
+  'select_case_for_profile': 'Please select a case to view its profile information.',
+  'select_case_for_routing': 'Please select a case to view its routing information.',
+  'select_refund_case': 'Select a refund case and click "Refund Review" in the header or row.',
+
+  // Process Steps
+  'step_1_3_fetching_subprocess': 'Step 1/3: Fetching Sub Process ID...',
+  'step_2_3_fetching_reference': 'Step 2/3: Fetching reference number...',
+  'step_3_3_fetching_refund': 'Step 3/3: Fetching refund details...',
+
+  // Profile Fields
+  'registration_date': 'Registration Date',
+  'email_address': 'Email Address',
+  'telephone_number': 'Telephone Number',
+  'tax_region': 'Tax Region',
+  'tax_office': 'Tax Office',
+  'tax_office_address': 'Tax Office Address',
+  'tax_office_phone': 'Tax Office Phone Number',
+  'description': 'Description',
+  'business_classification': 'Business Classification',
+  'tax_period': 'Tax Period',
+  'tax_year': 'Tax Year',
+  'last_modified': 'Last Modified',
+  'created_by': 'Created By',
+
+  // Common Values
+  'na': 'N/A',
+  'error_occurred': 'An error occurred:',
+  'language': 'Language'
 };
 
 export { translations };

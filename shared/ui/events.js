@@ -1,7 +1,7 @@
-// Remove unused imports
-// import { state } from '@core/state'; // Remove this line
 import { fetchMyCases } from '@api/cases';
-import { t } from '@i18n';
+import { t, setLanguage } from '@i18n';
+import { state } from '@core/state';
+import { createMainContent, switchToTab } from './components/mainContent';
 
 export function initializeEventHandlers() {
   // Toggle sidebar
@@ -12,6 +12,10 @@ export function initializeEventHandlers() {
   if (toggle && sidebar) {
     toggle.addEventListener('click', () => {
       sidebar.classList.toggle('open');
+      // Load main content when sidebar opens
+      if (sidebar.classList.contains('open')) {
+        createMainContent();
+      }
     });
   }
     
@@ -20,15 +24,69 @@ export function initializeEventHandlers() {
       sidebar.classList.remove('open');
     });
   }
+
+  // Language selection
+  const languageSelect = document.getElementById('ct-language-select');
+  if (languageSelect) {
+    // Set current language
+    languageSelect.value = state.get('currentLanguage') || 'en';
     
+    languageSelect.addEventListener('change', (e) => {
+      const newLanguage = e.target.value;
+      setLanguage(newLanguage);
+      state.set('currentLanguage', newLanguage);
+      
+      // Refresh the sidebar content
+      const sidebar = document.getElementById('coretabs-sidebar');
+      if (sidebar && sidebar.classList.contains('open')) {
+        updateSidebarLabels();
+        createMainContent();
+      }
+    });
+  }
+
   // Tab switching
-  const tabs = document.querySelectorAll('.coretabs-tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const tabName = tab.dataset.tab;
-      switchTab(tabName);
+  const tabButtons = document.querySelectorAll('.ct-tab-button');
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const tabId = button.dataset.tab;
+      const selectedCaseId = state.get('selectedCaseId');
+      switchToTab(tabId, selectedCaseId);
     });
   });
+
+  // Back button navigation
+  const backBtn = document.getElementById('ct-nav-back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      // Clear selected case
+      state.set('selectedCaseId', null);
+      
+      // Update header
+      const headerTitle = document.getElementById('ct-header-title-text');
+      const headerSubtitle = document.getElementById('ct-header-subtitle');
+      
+      if (headerTitle) {
+        headerTitle.textContent = t('no_case_selected');
+      }
+      
+      if (headerSubtitle) {
+        headerSubtitle.textContent = t('select_case_message');
+      }
+      
+      // Hide tab buttons
+      const tabButtons = document.getElementById('ct-tab-buttons');
+      if (tabButtons) {
+        tabButtons.style.display = 'none';
+      }
+      
+      // Hide back button
+      backBtn.style.display = 'none';
+      
+      // Load cases list
+      createMainContent();
+    });
+  }
     
   // Close sidebar when clicking outside
   document.addEventListener('click', (e) => {
@@ -38,7 +96,110 @@ export function initializeEventHandlers() {
       }
     }
   });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // ESC to close sidebar
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+    }
+    
+    // Ctrl+Shift+C to toggle sidebar
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+      e.preventDefault();
+      if (toggle) {
+        toggle.click();
+      }
+    }
+  });
+
+  // Initialize state listeners
+  initializeStateListeners();
 }
+
+function updateSidebarLabels() {
+  // Update navigation labels
+  const navTitle = document.getElementById('ct-nav-title');
+  if (navTitle) {
+    navTitle.textContent = t('my_cases');
+  }
+  
+  const backBtn = document.getElementById('ct-nav-back-btn');
+  if (backBtn) {
+    backBtn.textContent = t('back');
+  }
+  
+  // Update header labels
+  const headerTitle = document.getElementById('ct-header-title-text');
+  const headerSubtitle = document.getElementById('ct-header-subtitle');
+  
+  const selectedCaseId = state.get('selectedCaseId');
+  if (!selectedCaseId) {
+    if (headerTitle) {
+      headerTitle.textContent = t('no_case_selected');
+    }
+    if (headerSubtitle) {
+      headerSubtitle.textContent = t('select_case_message');
+    }
+  }
+  
+  // Update tab button labels
+  const tabButtons = document.querySelectorAll('.ct-tab-button');
+  tabButtons.forEach(button => {
+    const tabId = button.dataset.tab;
+    switch (tabId) {
+    case 'tab-profile':
+      button.textContent = t('profile');
+      break;
+    case 'tab-docs':
+      button.textContent = t('documents');
+      break;
+    case 'tab-users':
+      button.textContent = t('users');
+      break;
+    case 'tab-refund':
+      button.textContent = t('refund_review');
+      break;
+    case 'tab-routing':
+      button.textContent = t('routing');
+      break;
+    }
+  });
+}
+
+function initializeStateListeners() {
+  // Listen for case selection changes
+  state.subscribe('selectedCaseId', (caseId) => {
+    const backBtn = document.getElementById('ct-nav-back-btn');
+    const tabButtons = document.getElementById('ct-tab-buttons');
+    
+    if (caseId) {
+      // Show back button and tab buttons when case is selected
+      if (backBtn) {
+        backBtn.style.display = 'block';
+      }
+      if (tabButtons) {
+        tabButtons.style.display = 'flex';
+      }
+    } else {
+      // Hide back button and tab buttons when no case is selected
+      if (backBtn) {
+        backBtn.style.display = 'none';
+      }
+      if (tabButtons) {
+        tabButtons.style.display = 'none';
+      }
+    }
+  });
+  
+  // Listen for language changes
+  state.subscribe('currentLanguage', () => {
+    updateSidebarLabels();
+  });
+}
+
+// Export utility functions for external use
+export { switchToTab, updateSidebarLabels };
 
 export function switchTab(tabName) {
   // Update active tab
