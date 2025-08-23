@@ -132,6 +132,9 @@ export async function fetchCaseRouting(caseId) {
   }
 }
 
+// Alias for compatibility
+export { fetchCaseRouting as fetchRoutingData };
+
 // Refund Review API Functions
 export async function fetchRefundReview(caseId) {
   try {

@@ -1,10 +1,28 @@
 // Enhanced Excel export functionality using SheetJS
 import { formatDate } from '@utils/dateFormatter';
 
+// Load XLSX library for userscript environment
+function loadXLSX() {
+  return new Promise((resolve, reject) => {
+    // eslint-disable-next-line no-undef
+    if (typeof XLSX !== 'undefined') {
+      // eslint-disable-next-line no-undef
+      resolve(XLSX);
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.src = 'https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js';
+    script.onload = () => resolve(window.XLSX);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
 export async function exportToExcel(data, filename = 'export', options = {}) {
   try {
-    // Dynamic import of XLSX
-    const XLSX = await import('https://cdn.sheetjs.com/xlsx-0.20.0/package/xlsx.mjs');
+    // Load XLSX library
+    const XLSX = await loadXLSX();
     
     // Create workbook and worksheet
     const workbook = XLSX.utils.book_new();
@@ -85,7 +103,7 @@ function formatFileSize(bytes) {
 
 export async function exportMultipleSheets(sheetsData, filename = 'coretabs-export.xlsx') {
   try {
-    const XLSX = await import('https://cdn.sheetjs.com/xlsx-0.20.0/package/xlsx.mjs');
+    const XLSX = await loadXLSX();
     
     const workbook = XLSX.utils.book_new();
     

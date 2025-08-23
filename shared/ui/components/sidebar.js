@@ -118,7 +118,7 @@ export function createSidebar() {
   return sidebar;
 }
 
-function createToggleButton() {
+export function createToggleButton() {
   // Remove existing toggle if any
   const existing = document.getElementById('coretabs-toggle');
   if (existing) {
