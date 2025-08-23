@@ -24,8 +24,8 @@ A comprehensive userscript for enhancing the CoreTax intranet experience.
    - [Violentmonkey](https://violentmonkey.github.io/) (Chrome, Firefox, Edge)
 
 2. **Browse and install scripts:**
-   - **Browse All Scripts**: [📋 Script Gallery](https://htmlpreview.github.io/?https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/index.html)
-   - **Install Helper**: [🔧 Installation Assistant](https://htmlpreview.github.io/?https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/install.html)
+   - **Browse All Scripts**: [📋 Script Gallery](https://githack.com/diasbaskara/ct/raw/main/cdn/index.html)
+   - **Install Helper**: [🔧 Installation Assistant](https://githack.com/diasbaskara/ct/raw/main/cdn/install.html)
    - **CoreTabs**: [📥 Install Latest](https://cdn.jsdelivr.net/gh/diasbaskara/ct@main/cdn/latest/coretabs.user.js)
 
 ### Manual Installation
