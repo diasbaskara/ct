@@ -203,7 +203,7 @@ export { switchToTab, updateSidebarLabels };
 
 export function switchTab(tabName) {
   // Update active tab
-  document.querySelectorAll('.coretabs-tab').forEach(tab => {
+  document.querySelectorAll('.ct-tab-button').forEach(tab => {
     tab.classList.remove('active');
     if (tab.dataset.tab === tabName) {
       tab.classList.add('active');
@@ -211,7 +211,7 @@ export function switchTab(tabName) {
   });
     
   // Update active content
-  document.querySelectorAll('.coretabs-tab-content').forEach(content => {
+  document.querySelectorAll('.ct-tab-content').forEach(content => {
     content.classList.remove('active');
   });
     
@@ -225,7 +225,7 @@ export function switchTab(tabName) {
 }
 
 async function loadTabData(tabName) {
-  const contentElement = document.querySelector('.coretabs-content');
+  const contentElement = document.querySelector('.ct-content');
   if (!contentElement) return;
     
   // Clear content safely
@@ -234,7 +234,7 @@ async function loadTabData(tabName) {
   }
     
   const loadingDiv = document.createElement('div');
-  loadingDiv.className = 'coretabs-loading';
+  loadingDiv.className = 'ct-loading';
   loadingDiv.textContent = t('common.loading');
   contentElement.appendChild(loadingDiv);
     
@@ -275,7 +275,7 @@ async function loadTabData(tabName) {
       contentElement.removeChild(contentElement.firstChild);
     }
     const errorDiv = document.createElement('div');
-    errorDiv.className = 'coretabs-error';
+    errorDiv.className = 'ct-error';
     errorDiv.textContent = t('common.error');
     contentElement.appendChild(errorDiv);
   }
@@ -290,7 +290,7 @@ function renderCases(casesData, container) {
   }
     
   const table = document.createElement('table');
-  table.className = 'coretabs-table';
+  table.className = 'ct-results-table';
     
   // Create thead safely
   const thead = document.createElement('thead');
@@ -326,7 +326,7 @@ function renderCases(casesData, container) {
     // Status cell with badge
     const statusCell = document.createElement('td');
     const statusBadge = document.createElement('span');
-    statusBadge.className = `coretabs-badge status-${(caseItem.status || '').toLowerCase().replace(' ', '-')}`;
+    statusBadge.className = `ct-badge status-${(caseItem.status || '').toLowerCase().replace(' ', '-')}`;
     statusBadge.textContent = caseItem.status || 'N/A';
     statusCell.appendChild(statusBadge);
     row.appendChild(statusCell);

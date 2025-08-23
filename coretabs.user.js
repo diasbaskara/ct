@@ -17,9 +17,9 @@
     const AUTH_STORAGE_KEY = 'cats-angular-clientuser:https://coretax.intranet.pajak.go.id/identityprovider:cats-angular-client';
     const DEFAULT_CASES_FILTER = 'In Progress';
     const REFUND_CASE_TYPE_NAME = 'Pengembalian Melalui Pelaporan Surat Pemberitahuan (SPT)';
-    const I18N_STORAGE_KEY = 'coretabs-language';
-    const SIDEBAR_STATE_KEY = 'coretabs-sidebar-state';
-    const SIDEBAR_DATA_KEY = 'coretabs-sidebar-data';
+    const I18N_STORAGE_KEY = 'ct-language';
+    const SIDEBAR_STATE_KEY = 'ct-sidebar-state';
+    const SIDEBAR_DATA_KEY = 'ct-sidebar-data';
     // ----------------------------
 
     // --- State Management ---

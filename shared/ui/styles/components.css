@@ -45,7 +45,7 @@
     font-weight: var(--ct-font-weight-bold);
     letter-spacing: var(--ct-letter-spacing-wide);
     padding: var(--ct-space-3) var(--ct-space-2);
-    margin-right: var(--ct-space-1);
+    /* Removed margin-right to position flush against right edge */
     transition: all var(--ct-transition-fast);
     box-shadow: var(--ct-shadow-md);
 }
@@ -59,6 +59,14 @@
 #ct-sidebar-toggle:focus {
     outline: 3px solid var(--ct-primary-300);
     outline-offset: 3px;
+}
+
+/* Hide toggle button when sidebar is open */
+#ct-sidebar.open ~ #ct-sidebar-toggle {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-50%) translateX(100%);
+    pointer-events: none;
 }
 
 /* === HEADER AREA === */

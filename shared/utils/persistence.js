@@ -3,7 +3,7 @@ import { state } from '@core/state';
 
 export function setupPersistenceListeners() {
   // Save sidebar state when it changes
-  const sidebar = document.getElementById('coretabs-sidebar');
+  const sidebar = document.getElementById('ct-sidebar');
   if (sidebar) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -87,7 +87,7 @@ export async function restoreState() {
         
     // Apply restored state
     if (sidebarState.collapsed) {
-      document.body.classList.add('coretabs-sidebar-collapsed');
+      document.body.classList.add('ct-sidebar-collapsed');
     }
         
     // Activate restored tab

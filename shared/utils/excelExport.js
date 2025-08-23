@@ -101,7 +101,7 @@ function formatFileSize(bytes) {
   return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
 }
 
-export async function exportMultipleSheets(sheetsData, filename = 'coretabs-export.xlsx') {
+export async function exportMultipleSheets(sheetsData, filename = 'ct-export.xlsx') {
   try {
     const XLSX = await loadXLSX();
     

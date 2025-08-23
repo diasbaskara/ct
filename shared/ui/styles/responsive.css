@@ -388,30 +388,34 @@
 }
 
 /* Mobile responsive styles for ct- elements */
+/* Remove lines 337-388 (legacy coretabs- styles) and replace with: */
+
 @media (max-width: 768px) {
     #ct-sidebar {
-        width: 100vw;
-        right: -100vw;
+        width: 280px;
+        transform: translateX(-100%);
     }
     
     #ct-sidebar.open {
-        right: 0;
+        transform: translateX(0);
     }
     
     #ct-sidebar-toggle {
+        display: block;
         top: 10px;
         right: 10px;
         width: 40px;
         height: 40px;
-        font-size: var(--ct-font-size-base);
+        font-size: var(--ct-font-size-sm);
     }
     
     #ct-content {
-        padding: var(--ct-space-3);
+        margin-left: 0;
+        padding: var(--ct-space-4);
     }
     
     .ct-results-table {
-        font-size: 11px;
+        font-size: 0.9rem;
     }
     
     .ct-results-table th,
@@ -425,11 +429,11 @@
         padding: var(--ct-space-3);
     }
     
-    .ct-nav-title {
+    #ct-nav-title {
         font-size: var(--ct-font-size-base);
     }
     
-    .ct-tabs {
+    .ct-nav-tabs {
         flex-wrap: wrap;
     }
     
