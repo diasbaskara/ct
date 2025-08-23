@@ -7,7 +7,7 @@ yarn-error.log*
 
 # Build outputs
 dist/
-build/
+# Remove this line: build/
 *.tgz
 *.tar.gz
 
