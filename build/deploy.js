@@ -109,7 +109,15 @@ class MultiScriptDeployer {
       // Replace the header reading logic with:
       const header = this.generateUserScriptHeader(config);
       const script = fs.readFileSync(userScriptPath, 'utf8');
+      
+      // Add debugging
+      console.log(`DEBUG: userScriptPath = ${userScriptPath}`);
+      console.log(`DEBUG: script length = ${script.length}`);
+      console.log(`DEBUG: script first 100 chars = ${script.substring(0, 100)}`);
+      console.log(`DEBUG: header length = ${header.length}`);
+      
       const combined = header + '\n' + script;
+      console.log(`DEBUG: combined length = ${combined.length}`);
 
       // Create meta.js (header only)
       const metaContent = header;
