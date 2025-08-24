@@ -190,3 +190,5 @@ body,
     font-family: var(--ct-font-family);
     text-rendering: optimizeLegibility;
 }
+
+/* Remove lines 195-202 that are outside the :root block */

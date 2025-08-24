@@ -1,4 +1,5 @@
 import { t } from '@i18n';
+import { createCaseDetailsScreen } from './caseDetailsScreen';
 
 export function createSidebar() {
   // Remove existing sidebar if any
@@ -55,51 +56,15 @@ export function createSidebar() {
   nav.appendChild(navTitle);
   nav.appendChild(languageSelect);
   
-  // Header title section
-  const headerTitle = document.createElement('div');
-  headerTitle.className = 'ct-header-title';
-  headerTitle.id = 'ct-header-title';
-  
-  const titleText = document.createElement('h3');
-  titleText.id = 'ct-header-title-text';
-  titleText.textContent = t('no_case_selected');
-  
-  const subtitle = document.createElement('p');
-  subtitle.id = 'ct-header-subtitle';
-  subtitle.textContent = t('select_case_message');
-  
-  headerTitle.appendChild(titleText);
-  headerTitle.appendChild(subtitle);
-  
-  // Tab buttons
-  const tabButtons = document.createElement('div');
-  tabButtons.className = 'ct-tab-buttons';
-  tabButtons.id = 'ct-tab-buttons';
-  
-  const tabs = [
-    { id: 'tab-profile', key: 'profile' },
-    { id: 'tab-docs', key: 'documents' },
-    { id: 'tab-users', key: 'users' },
-    { id: 'tab-refund', key: 'refund_review' },
-    { id: 'tab-routing', key: 'routing' }
-  ];
-  
-  tabs.forEach(tab => {
-    const button = document.createElement('button');
-    button.className = 'ct-tab-button';
-    button.dataset.tab = tab.id;
-    button.textContent = t(tab.key);
-    tabButtons.appendChild(button);
-  });
-  
   header.appendChild(nav);
-  header.appendChild(headerTitle);
-  header.appendChild(tabButtons);
     
   // Create content area
   const content = document.createElement('div');
   content.className = 'ct-content';
   content.id = 'ct-content';
+  
+  // Create the case details screen inside content
+  createCaseDetailsScreen(content);
     
   sidebar.appendChild(header);
   sidebar.appendChild(content);

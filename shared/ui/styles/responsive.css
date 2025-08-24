@@ -333,114 +333,56 @@
     }
 }
 
-/* Legacy compatibility */
+/* Updated legacy compatibility with consistent naming */
 @media (max-width: 768px) {
-    .coretabs-sidebar {
+    #ct-sidebar {
         width: 100vw;
         right: -100vw;
     }
     
-    .coretabs-sidebar.open {
+    #ct-sidebar.open {
         right: 0;
     }
     
-    .coretabs-toggle {
-        top: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        font-size: var(--font-size-normal);
-    }
-    
-    .coretabs-content {
-        padding: var(--spacing-sm);
-    }
-    
-    .coretabs-table {
-        font-size: 11px;
-    }
-    
-    .coretabs-table th,
-    .coretabs-table td {
-        padding: var(--spacing-xs);
-    }
-}
-
-@media (max-width: 480px) {
-    .coretabs-header {
-        padding: var(--spacing-sm);
-    }
-    
-    .coretabs-title {
-        font-size: var(--font-size-normal);
-    }
-    
-    .coretabs-tabs {
-        flex-wrap: wrap;
-    }
-    
-    .coretabs-tab {
-        flex: 1;
-        min-width: 80px;
-        padding: var(--spacing-xs) var(--spacing-sm);
-        font-size: var(--font-size-small);
-    }
-}
-
-/* Mobile responsive styles for ct- elements */
-/* Remove lines 337-388 (legacy coretabs- styles) and replace with: */
-
-@media (max-width: 768px) {
-    #ct-sidebar {
-        width: 280px;
-        transform: translateX(-100%);
-    }
-    
-    #ct-sidebar.open {
-        transform: translateX(0);
-    }
-    
     #ct-sidebar-toggle {
-        display: block;
         top: 10px;
         right: 10px;
         width: 40px;
         height: 40px;
-        font-size: var(--ct-font-size-sm);
+        font-size: var(--ct-font-size-base);
     }
     
     #ct-content {
-        margin-left: 0;
-        padding: var(--ct-space-4);
+        padding: var(--ct-space-2);
     }
     
     .ct-results-table {
-        font-size: 0.9rem;
+        font-size: 11px;
     }
     
     .ct-results-table th,
     .ct-results-table td {
-        padding: var(--ct-space-2);
+        padding: var(--ct-space-1);
     }
 }
 
 @media (max-width: 480px) {
     #ct-header {
-        padding: var(--ct-space-3);
+        padding: var(--ct-space-2);
     }
     
     #ct-nav-title {
         font-size: var(--ct-font-size-base);
     }
     
-    .ct-nav-tabs {
+    #ct-tab-buttons {
         flex-wrap: wrap;
     }
     
     .ct-tab-button {
         flex: 1;
         min-width: 80px;
-        padding: var(--ct-space-2) var(--ct-space-3);
-        font-size: var(--ct-font-size-sm);
+        padding: var(--ct-space-1) var(--ct-space-2);
+        font-size: var(--ct-font-size-xs);
     }
 }

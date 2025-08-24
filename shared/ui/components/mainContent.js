@@ -1,10 +1,6 @@
 import { t } from '@i18n';
 import { state } from '@core/state';
-import { createProfileTab } from './profileTab';
-import { createDocumentsTab } from './documentsTab';
-import { createUsersTab } from './usersTab';
-import { createRefundTab } from './refundTab';
-import { createRoutingTab } from './routingTab';
+import { updateCaseDetailsHeader, switchToCaseDetailsTab } from './caseDetailsScreen';
 import { fetchMyCases } from '@api/cases';
 
 export function createMainContent() {
@@ -12,62 +8,37 @@ export function createMainContent() {
   if (!content) return;
   
   // Load and display cases list initially
-  loadCasesList(content);
+  loadCasesList();
 }
 
 export function switchToTab(tabId, caseId) {
-  const content = document.getElementById('ct-content');
-  if (!content) return;
-  
-  // Clear content
-  content.innerHTML = '';
-  
-  // Update tab buttons
-  document.querySelectorAll('.ct-tab-button').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.dataset.tab === tabId) {
-      btn.classList.add('active');
-    }
-  });
-  
-  // Load appropriate tab content
-  switch (tabId) {
-  case 'tab-profile':
-    createProfileTab(content, caseId);
-    break;
-  case 'tab-docs':
-    createDocumentsTab(content, caseId);
-    break;
-  case 'tab-users':
-    createUsersTab(content, caseId);
-    break;
-  case 'tab-refund':
-    createRefundTab(content, caseId);
-    break;
-  case 'tab-routing':
-    createRoutingTab(content, caseId);
-    break;
-  default:
-    loadCasesList(content);
-  }
+  switchToCaseDetailsTab(tabId, caseId);
 }
 
-function loadCasesList(container) {
+function loadCasesList() {
+  const tabContentArea = document.getElementById('ct-tab-content-area');
+  if (!tabContentArea) return;
+  
+  // Clear all tab panels and show cases list in the first panel
+  const firstPanel = document.getElementById('tab-profile');
+  if (!firstPanel) return;
+  
   // Show loading
+  firstPanel.innerHTML = '';
   const loading = document.createElement('div');
   loading.className = 'ct-loading';
   loading.textContent = t('loading_my_cases');
-  container.appendChild(loading);
+  firstPanel.appendChild(loading);
   
   // Fetch and display cases
   fetchMyCases().then(casesData => {
-    container.innerHTML = '';
+    firstPanel.innerHTML = '';
     
     if (!casesData || !casesData.data || casesData.data.length === 0) {
       const noCases = document.createElement('div');
       noCases.className = 'ct-no-data';
       noCases.textContent = t('cases.no_data');
-      container.appendChild(noCases);
+      firstPanel.appendChild(noCases);
       return;
     }
     
@@ -110,7 +81,7 @@ function loadCasesList(container) {
     casesData.data.forEach(caseItem => {
       const row = document.createElement('tr');
       row.className = 'ct-case-row';
-      row.onclick = () => selectCase(caseItem.id, caseItem.caseNumber);
+      row.onclick = () => selectCase(caseItem.id, caseItem.caseNumber, caseItem);
       
       // Case number
       const caseNumberCell = document.createElement('td');
@@ -160,39 +131,24 @@ function loadCasesList(container) {
     
     casesTable.appendChild(tbody);
     casesList.appendChild(casesTable);
-    container.appendChild(casesList);
+    firstPanel.appendChild(casesList);
     
   }).catch(() => {
-    container.innerHTML = '';
+    firstPanel.innerHTML = '';
     const errorDiv = document.createElement('div');
     errorDiv.className = 'ct-error';
     errorDiv.textContent = t('common.error');
-    container.appendChild(errorDiv);
+    firstPanel.appendChild(errorDiv);
   });
 }
 
-function selectCase(caseId, caseNumber) {
+function selectCase(caseId, caseNumber, caseData) {
   // Update state
   state.set('selectedCaseId', caseId);
   
-  // Update header
-  const headerTitle = document.getElementById('ct-header-title-text');
-  const headerSubtitle = document.getElementById('ct-header-subtitle');
-  
-  if (headerTitle) {
-    headerTitle.textContent = `${t('case')} ${caseNumber}`;
-  }
-  
-  if (headerSubtitle) {
-    headerSubtitle.textContent = t('case_selected_message');
-  }
-  
-  // Show tab buttons
-  const tabButtons = document.getElementById('ct-tab-buttons');
-  if (tabButtons) {
-    tabButtons.style.display = 'flex';
-  }
+  // Update header with proper structure
+  updateCaseDetailsHeader(caseData);
   
   // Load profile tab by default
-  switchToTab('tab-profile', caseId);
+  switchToCaseDetailsTab('tab-profile', caseId);
 }
