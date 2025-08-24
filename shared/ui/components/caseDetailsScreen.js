@@ -1,5 +1,6 @@
 import { t } from '@i18n';
-import { state } from '@core/state';
+// Remove this unused import
+// import { state } from '@core/state';
 import { createProfileTab } from './profileTab';
 import { createDocumentsTab } from './documentsTab';
 import { createUsersTab } from './usersTab';
@@ -147,21 +148,21 @@ export function switchToCaseDetailsTab(tabId, caseId) {
     
     // Load appropriate tab content
     switch (tabId) {
-      case 'tab-profile':
-        createProfileTab(activePanel, caseId);
-        break;
-      case 'tab-docs':
-        createDocumentsTab(activePanel, caseId);
-        break;
-      case 'tab-users':
-        createUsersTab(activePanel, caseId);
-        break;
-      case 'tab-refund':
-        createRefundTab(activePanel, caseId);
-        break;
-      case 'tab-routing':
-        createRoutingTab(activePanel, caseId);
-        break;
+    case 'tab-profile':
+      createProfileTab(activePanel, caseId);
+      break;
+    case 'tab-docs':
+      createDocumentsTab(activePanel, caseId);
+      break;
+    case 'tab-users':
+      createUsersTab(activePanel, caseId);
+      break;
+    case 'tab-refund':
+      createRefundTab(activePanel, caseId);
+      break;
+    case 'tab-routing':
+      createRoutingTab(activePanel, caseId);
+      break;
     }
   }
 }
